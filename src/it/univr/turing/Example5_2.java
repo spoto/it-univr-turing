@@ -44,27 +44,27 @@ public class Example5_2 extends AbstractMachine {
 			switch (head) {
 			case 'a': return new Next(1, 'X', R);
 			case 'Y': return new Next(3, 'Y', R);
-			default: throw new RejectedException("There is no transition from state = " + state + " and head = " + head);
+			default: break;
 			}
 		case 1:
 			switch (head) {
 			case 'a': return new Next(1, 'a', R);
 			case 'b': return new Next(2, 'Y', L);
 			case 'Y': return new Next(1, 'Y', R);
-			default: throw new RejectedException("There is no transition from state = " + state + " and head = " + head);
+			default: break;
 			}
 		case 2:
 			switch (head) {
 			case 'a': return new Next(2, 'a', L);
 			case 'X': return new Next(0, 'X', R);
 			case 'Y': return new Next(2, 'Y', L);
-			default: throw new RejectedException("There is no transition from state = " + state + " and head = " + head);
+			default: break;
 			}
 		case 3:
 			switch (head) {
 			case 'Y': return new Next(3, 'Y', R);
 			case '#': return new Next(4, '#', R);
-			default: throw new RejectedException("There is no transition from state = " + state + " and head = " + head);
+			default: break;
 			}
 		}
 

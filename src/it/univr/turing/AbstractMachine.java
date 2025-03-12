@@ -95,7 +95,17 @@ public abstract class AbstractMachine implements Machine {
 			char bPrime = next.bPrime();
 			int qPrime = next.qPrime();
 
-			if (next.direction() == Direction.L) {
+			if (next.direction() == Direction.R) {
+				String alpha1 = before;
+
+				if (after.isEmpty())
+					return new Configuration(qPrime, alpha1 + bPrime, "");
+				else {
+					String alpha2 = after.substring(1);
+					return new Configuration(qPrime, alpha1 + bPrime, alpha2);
+				}
+			}
+			else { // next.direction() == Direction.L
 				if (before.isEmpty())
 					throw new RejectedException("Cannot move further to the left of the tape");
 
@@ -107,16 +117,6 @@ public abstract class AbstractMachine implements Machine {
 				else {
 					String alpha2Prime = after.substring(1); 
 					return new Configuration(qPrime, alpha1Prime, a + (bPrime + alpha2Prime));
-				}
-			}
-			else { // next.direction() == Direction.R
-				String alpha1 = before;
-
-				if (after.isEmpty())
-					return new Configuration(qPrime, alpha1 + bPrime, "");
-				else {
-					String alpha2 = after.substring(1);
-					return new Configuration(qPrime, alpha1 + bPrime, alpha2);
 				}
 			}
 		}
