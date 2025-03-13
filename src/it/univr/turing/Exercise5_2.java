@@ -19,12 +19,12 @@ package it.univr.turing;
 import static it.univr.turing.Machine.Direction.*;
 
 /**
- * Example 5.2 of Pierre Wolper, "Introduction à la Calculabilité", 3rd edition.
+ * Exercise 5.2 of Pierre Wolper, "Introduction à la Calculabilité", 3rd edition.
  */
-public class Example5_2 extends AbstractMachine {
+public class Exercise5_2 extends AbstractMachine {
 
 	public static void main(String[] args) throws RejectedException {
-		new Example5_2().askForInputAndExecute();
+		new Exercise5_2().askForInputAndExecute();
 	}
 
 	@Override
@@ -34,7 +34,7 @@ public class Example5_2 extends AbstractMachine {
 
 	@Override
 	public boolean accepts(int state) {
-		return state == 4;
+		return state == 6;
 	}
 
 	@Override
@@ -42,30 +42,49 @@ public class Example5_2 extends AbstractMachine {
 		switch (state) {
 		case 0:
 			switch (head) {
-			case 'a': return new Next(1, 'X', R);
-			case 'Y': return new Next(3, 'Y', R);
+			case 'a': return new Next(1, 'A', R);
+			case 'B': return new Next(4, 'B', R);
+			case 'b': return new Next(5, 'b', R);
 			default: break;
 			}
+			break;
 		case 1:
 			switch (head) {
 			case 'a': return new Next(1, 'a', R);
-			case 'b': return new Next(2, 'Y', L);
-			case 'Y': return new Next(1, 'Y', R);
+			case 'b': return new Next(3, 'B', L);
+			case 'B': return new Next(2, 'B', R);
 			default: break;
 			}
+			break;
 		case 2:
 			switch (head) {
-			case 'a': return new Next(2, 'a', L);
-			case 'X': return new Next(0, 'X', R);
-			case 'Y': return new Next(2, 'Y', L);
+			case 'B': return new Next(2, 'B', R);
+			case 'b': return new Next(3, 'B', L);
 			default: break;
 			}
+			break;
 		case 3:
 			switch (head) {
-			case 'Y': return new Next(3, 'Y', R);
-			case '#': return new Next(4, '#', R);
+			case 'a': return new Next(3, 'a', L);
+			case 'B': return new Next(3, 'B', L);
+			case 'A': return new Next(0, 'A', R);
 			default: break;
 			}
+			break;
+		case 4:
+			switch (head) {
+			case 'B': return new Next(4, 'B', R);
+			case 'b': return new Next(5, 'b', R);
+			default: break;
+			}
+			break;
+		case 5:
+			switch (head) {
+			case 'b': return new Next(5, 'b', R);
+			case '#': return new Next(6, '#', R);
+			default: break;
+			}
+			break;
 		}
 
 		throw new RejectedException("There is no transition from state = " + state + " and head = " + head);
